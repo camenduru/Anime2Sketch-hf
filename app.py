@@ -20,7 +20,7 @@ from model import UnetGenerator
 
 TITLE = 'Mukosame/Anime2Sketch'
 DESCRIPTION = 'This is an unofficial demo for https://github.com/Mukosame/Anime2Sketch.'
-ARTICLE = None
+ARTICLE = '<center><img src="https://visitor-badge.glitch.me/badge?page_id=hysts.anime2sketch" alt="visitor badge"/></center>'
 
 TOKEN = os.environ['TOKEN']
 
