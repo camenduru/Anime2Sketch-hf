@@ -19,7 +19,7 @@ from data import read_img_path, tensor_to_img
 from model import UnetGenerator
 
 TITLE = 'Mukosame/Anime2Sketch'
-DESCRIPTION = 'This is a demo for https://github.com/Mukosame/Anime2Sketch.'
+DESCRIPTION = 'This is an unofficial demo for https://github.com/Mukosame/Anime2Sketch.'
 ARTICLE = None
 
 TOKEN = os.environ['TOKEN']
