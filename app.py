@@ -79,8 +79,6 @@ def run(image_file,
 
 
 def main():
-    gr.close_all()
-
     args = parse_args()
     device = torch.device(args.device)
 
