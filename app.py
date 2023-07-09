@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import functools
-import os
 import sys
 
 import gradio as gr
@@ -18,9 +17,7 @@ from data import read_img_path, tensor_to_img
 from model import UnetGenerator
 
 TITLE = 'Anime2Sketch'
-DESCRIPTION = 'This is an unofficial demo for https://github.com/Mukosame/Anime2Sketch.'
-
-HF_TOKEN = os.getenv('HF_TOKEN')
+DESCRIPTION = 'https://github.com/Mukosame/Anime2Sketch'
 
 
 def load_model(device: torch.device) -> nn.Module:
@@ -34,9 +31,8 @@ def load_model(device: torch.device) -> nn.Module:
                           norm_layer=norm_layer,
                           use_dropout=False)
 
-    path = huggingface_hub.hf_hub_download('hysts/Anime2Sketch',
-                                           'netG.pth',
-                                           use_auth_token=HF_TOKEN)
+    path = huggingface_hub.hf_hub_download('public-data/Anime2Sketch',
+                                           'netG.pth')
     ckpt = torch.load(path)
     for key in list(ckpt.keys()):
         if 'module.' in key:
@@ -65,15 +61,15 @@ def run(image_file: str,
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 model = load_model(device)
 
-func = functools.partial(run, model=model, device=device)
+fn = functools.partial(run, model=model, device=device)
 
 examples = [['Anime2Sketch/test_samples/madoka.jpg']]
 
 gr.Interface(
-    fn=func,
+    fn=fn,
     inputs=gr.Image(label='Input', type='filepath'),
-    outputs=gr.Image(label='Output', type='pil'),
+    outputs=gr.Image(label='Output'),
     examples=examples,
     title=TITLE,
     description=DESCRIPTION,
-).queue().launch(show_api=False)
+).queue().launch()
